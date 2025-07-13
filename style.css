@@ -1,85 +1,53 @@
-/* Estilos generales y fuente */
+/* Fuente moderna y básica */
 body {
   font-family: 'Poppins', sans-serif;
-  background: #fff0f6; /* rosa pastel clarito */
-  color: #333;
+  background-color: #fff0f6; /* rosa pastel clarito */
   margin: 0;
   padding: 20px;
+  color: #4a4a4a;
+  text-align: center;
 }
 
-/* Contenedor principal */
-#materias-container {
+/* Título */
+h1 {
+  color: #ff69b4; /* rosa vivo */
+  margin-bottom: 30px;
+}
+
+/* Contenedor grid para los semestres */
+.contenedor-semestres {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   max-width: 900px;
-  margin: 30px auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
+  margin: 0 auto;
 }
 
-/* Tarjetas de materias */
-.materia {
-  background: #ffd6e8; /* rosa pastel más fuerte */
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(214, 51, 108, 0.2);
-  width: 180px;
-  padding: 18px 15px;
+/* Estilo de cada semestre */
+.semestre {
+  background-color: #ffe6f0;
+  border: 2px solid #ffb6c1;
+  border-radius: 10px;
+  padding: 25px 15px;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.3s ease;
   user-select: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  border: 2px solid transparent;
+  box-shadow: 0 2px 6px rgba(255,105,180,0.2);
 }
 
-/* Efecto hover para materias desbloqueables o aprobadas */
-.materia.desbloqueada:hover {
-  box-shadow: 0 6px 12px rgba(214, 51, 108, 0.5);
-  transform: translateY(-4px);
-  border-color: #d6336c;
+/* Efecto hover para que se vea más nice */
+.semestre:hover {
+  background-color: #ffb6c1;
+  color: white;
+  border-color: #ff69b4;
+  box-shadow: 0 4px 10px rgba(255,105,180,0.4);
 }
 
-/* Estado bloqueado */
-.materia.bloqueada {
-  background: #f8d7da;
-  color: #a1a1a1;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-/* Estado aprobada */
-.materia.aprobada {
-  background: #d6336c;
-  color: #fff;
-  font-weight: 700;
-  box-shadow: 0 0 12px #d6336c;
-  border-color: #a8203a;
-}
-
-/* Título de materia */
-.materia h3 {
-  margin: 10px 0 8px 0;
-  font-size: 1.1rem;
-}
-
-/* Estado aprobado - ícono o texto */
-.materia.aprobada::after {
-  content: '✔';
-  color: #fff;
-  font-size: 1.3rem;
-  margin-top: 8px;
-}
-
-/* Responsive para pantallas chicas */
-@media (max-width: 500px) {
-  #materias-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .materia {
-    width: 90%;
-  }
+/* Estilo cuando un semestre está activo */
+.semestre.activo {
+  border: 3px solid #ff1493;
+  background-color: #ff69b4;
+  color: white;
+  box-shadow: 0 5px 15px rgba(255,20,147,0.6);
 }
