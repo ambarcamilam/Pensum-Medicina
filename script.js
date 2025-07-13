@@ -111,62 +111,14 @@ const materias = [
   { nombre: "Trabajo Profesional III", id: "trab3", requiere: ["trab2"], semestre: 16 },
   { nombre: "Electiva Profesional 4", id: "electivaprof4", requiere: [], semestre: 16 },
 ];
-const materiasAprobadas = new Set();
+// Seleccionamos todos los semestres
+const semestres = document.querySelectorAll('.semestre');
 
-const contenedor = document.getElementById("materias-container");
-
-const materiasPorSemestre = {};
-
-materias.forEach(m => {
-  if (!materiasPorSemestre[m.semestre]) materiasPorSemestre[m.semestre] = [];
-  materiasPorSemestre[m.semestre].push(m);
-});
-
-function estaDesbloqueada(materia) {
-  if (materia.requiere.length === 0) return true;
-  return materia.requiere.every(req => materiasAprobadas.has(req));
-}
-
-function renderizarMaterias() {
-  contenedor.innerHTML = "";
-
-  Object.keys(materiasPorSemestre).sort((a,b) => a - b).forEach(sem => {
-    const tituloSemestre = document.createElement("h2");
-    tituloSemestre.textContent = `Semestre ${sem}`;
-    tituloSemestre.className = "titulo-semestre";
-    contenedor.appendChild(tituloSemestre);
-
-    const fila = document.createElement("div");
-    fila.className = "fila-materias";
-    contenedor.appendChild(fila);
-
-    materiasPorSemestre[sem].forEach(materia => {
-      const card = document.createElement("div");
-      card.className = "materia-card";
-
-      if (materiasAprobadas.has(materia.id)) {
-        card.classList.add("aprobada");
-      } else if (!estaDesbloqueada(materia)) {
-        card.classList.add("locked");
-        card.style.cursor = "not-allowed";
-      } else {
-        card.style.cursor = "pointer";
-        card.addEventListener("click", () => {
-          materiasAprobadas.add(materia.id);
-          renderizarMaterias();
-        });
-        card.addEventListener("mouseenter", () => {
-          card.classList.add("hover");
-        });
-        card.addEventListener("mouseleave", () => {
-          card.classList.remove("hover");
-        });
-      }
-
-      card.textContent = materia.nombre;
-      fila.appendChild(card);
-    });
+semestres.forEach(sem => {
+  sem.addEventListener('click', () => {
+    // Quitamos la clase activo de todos
+    semestres.forEach(s => s.classList.remove('activo'));
+    // Activamos el semestre clickeado
+    sem.classList.add('activo');
   });
-}
-
-renderizarMaterias();
+});
